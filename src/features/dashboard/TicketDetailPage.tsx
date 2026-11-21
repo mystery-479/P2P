@@ -8,7 +8,7 @@ import { DemoNotice } from "../../components/DemoNotice";
 import { Field } from "../../components/Field";
 import { Select } from "../../components/Inputs";
 import { formatDateTime } from "../../lib/format";
-import { getTicket, updateTicket } from "../../lib/ticketApi";
+import { updateTicket, useTickets } from "../../lib/ticketStore";
 import {
   CATEGORIES,
   DEPARTMENTS,
@@ -40,45 +40,29 @@ function toForm(ticket: Ticket): ActionForm {
 
 export function TicketDetailPage() {
   const { ticketId } = useParams<{ ticketId: string }>();
-  const [ticket, setTicket] = useState<Ticket | null>(null);
+  const tickets = useTickets();
+  const ticket = tickets.find((item) => item.id === ticketId);
+
   const [form, setForm] = useState<ActionForm | null>(null);
   const [recommendation, setRecommendation] = useState<ActionForm | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [feedback, setFeedback] = useState<{ kind: "success" | "error"; text: string } | null>(null);
-  const [loadError, setLoadError] = useState("");
 
   useEffect(() => {
-    let active = true;
-    setLoading(true);
-    setLoadError("");
-    if (!ticketId) {
-      setTicket(null);
-      setLoading(false);
-      return;
-    }
-    void getTicket(ticketId)
-      .then((loaded) => {
-        if (!active) return;
-        setTicket(loaded ?? null);
-        if (loaded) {
-          const initial = toForm(loaded);
-          setForm(initial);
-          setRecommendation(initial);
-          setFeedback(null);
-          document.title = `Ticket ${loaded.id} — TownThread`;
-        }
-      })
-      .catch((cause) => {
-        if (active) setLoadError(cause instanceof Error ? cause.message : "Could not load ticket.");
-      })
-      .finally(() => {
-        if (active) setLoading(false);
-      });
-    return () => {
-      active = false;
-    };
-  }, [ticketId]);
+    const timer = window.setTimeout(() => setLoading(false), 300);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (!ticket) return;
+    const initial = toForm(ticket);
+    setForm(initial);
+    setRecommendation(initial);
+    setFeedback(null);
+    document.title = `Ticket ${ticket.id} — ReportBox`;
+    // Only re-initialise when navigating to a different ticket, not after a save.
+  }, [ticket?.id]);
 
   function set<K extends keyof ActionForm>(key: K, value: ActionForm[K]) {
     setForm((current) => (current ? { ...current, [key]: value } : current));
@@ -90,15 +74,10 @@ export function TicketDetailPage() {
     setSaving(true);
     setFeedback(null);
     try {
-      const updated = await updateTicket(ticket.id, form);
-      setTicket(updated);
-      setForm(toForm(updated));
+      updateTicket(ticket.id, form);
       setFeedback({ kind: "success", text: "Saved. Your queue now shows the updated ticket." });
-    } catch (cause) {
-      setFeedback({
-        kind: "error",
-        text: cause instanceof Error ? cause.message : "We could not save those changes. Please try again.",
-      });
+    } catch {
+      setFeedback({ kind: "error", text: "We could not save those changes. Please try again." });
     } finally {
       setSaving(false);
     }
@@ -128,8 +107,8 @@ export function TicketDetailPage() {
     return (
       <div className="page page--narrow">
         <Card className="empty-card">
-          <h1>{loadError ? "Could not load ticket" : "Ticket not found"}</h1>
-          <p>{loadError || "We could not find that ticket or you do not have permission to view it."}</p>
+          <h1>Ticket not found</h1>
+          <p>We could not find that ticket in this browser's demo data.</p>
           <Link className={buttonClass("primary")} to="/dashboard">
             Back to dashboard
           </Link>

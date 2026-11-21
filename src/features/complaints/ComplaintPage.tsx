@@ -337,7 +337,7 @@ export function ComplaintPage() {
           </form>
         </Card>
 
-        <aside className="report-aside" aria-label="How TownThread works">
+        <aside className="report-aside" aria-label="How ReportBox works">
           <DemoNotice />
           <Card className="steps-card">
             <h2>What happens next</h2>
@@ -368,7 +368,7 @@ export function ComplaintPage() {
           <Card className="safety-card">
             <h2>Urgent danger?</h2>
             <p>
-              TownThread is not an emergency service. For fires, accidents or immediate risk to life,
+              ReportBox is not an emergency service. For fires, accidents or immediate risk to life,
               contact your local emergency number first.
             </p>
           </Card>

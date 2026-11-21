@@ -9,7 +9,7 @@ import type { ComplaintDraft, Ticket } from "../types/ticket";
  * in `src/services/` without changing the exported functions.
  */
 
-const STORAGE_KEY = "townthread.tickets.v1";
+const STORAGE_KEY = "reportbox.tickets.v1";
 
 type TicketPatch = Partial<
   Pick<Ticket, "category" | "severity" | "severityReason" | "department" | "status" | "needsReview">
