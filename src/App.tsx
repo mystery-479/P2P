@@ -1,7 +1,7 @@
 import { BrowserRouter, Link, Navigate, Route, Routes } from "react-router-dom";
 import { buttonClass } from "./components/Button";
 import { Card } from "./components/Card";
-import { Layout } from "./components/Layout";
+import { Layout } from "./components/layout/Layout";
 import { AuthPage } from "./features/auth/AuthPage";
 import { AuthProvider, useAuth } from "./features/auth/AuthProvider";
 import { RequireRole } from "./features/auth/RequireRole";
@@ -12,6 +12,7 @@ import { ComplaintPage } from "./features/complaints/ComplaintPage";
 import { ConfirmationPage } from "./features/complaints/ConfirmationPage";
 import { MyReportsPage } from "./features/citizen/MyReportsPage";
 import { AdminPage } from "./features/admin/AdminPage";
+import { LiveMapPage } from "./features/map/LiveMapPage";
 
 function NotFound() {
   return (
@@ -65,6 +66,7 @@ function AppRoutes() {
         <Route element={<RequireRole allowed={["official", "admin"]} />}>
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/dashboard/:ticketId" element={<TicketDetailPage />} />
+          <Route path="/map" element={<LiveMapPage />} />
         </Route>
         <Route element={<RequireRole allowed={["admin"]} />}>
           <Route path="/admin" element={<AdminPage />} />

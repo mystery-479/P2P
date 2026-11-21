@@ -1,42 +1,144 @@
 :root {
   color-scheme: light;
 
-  --color-ink: #10243e;
-  --color-ink-soft: #1b3556;
-  --color-text: #15243a;
-  --color-muted: #5b6b80;
-  --color-line: #dbe3ef;
-  --color-canvas: #f6f7fb;
+  /* Municipal ink — authority, deep and trustworthy */
+  --color-ink: #0f172a;
+  --color-ink-soft: #334155;
+  --color-text: #1e293b;
+  --color-muted: #64748b;
+  --color-line: #e2e8f0;
+  --color-line-soft: #f1f5f9;
+
+  /* Canvas — bright municipal paper */
+  --color-canvas: #f8fafc;
   --color-surface: #ffffff;
-  --color-surface-soft: #f8fafc;
+  --color-surface-soft: #f1f5f9;
 
-  --color-brand: #1a5fd0;
-  --color-brand-dark: #134aa6;
-  --color-brand-soft: #e8f0fe;
+  /* Brand — official indigo */
+  --color-brand: #2563eb;
+  --color-brand-dark: #1d4ed8;
+  --color-brand-soft: #eff6ff;
+
+  /* Accent — warm teal for actions */
   --color-accent: #0f766e;
-  --color-warm: #f59e0b;
+  --color-accent-dark: #115e59;
+  --color-accent-soft: #ecfdf5;
+
+  /* Warm — amber for cautions */
+  --color-warm: #d97706;
   --color-warm-soft: #fff7ed;
+
+  /* Danger — official red */
   --color-danger: #b42318;
+  --color-danger-soft: #fef2f2;
 
-  --color-critical-bg: #fee4e2;
-  --color-critical-text: #912018;
-  --color-high-bg: #ffedd5;
-  --color-high-text: #9a3412;
-  --color-medium-bg: #fef3c7;
+  /* Severity — official, unmistakable */
+  --color-critical-bg: #fef2f2;
+  --color-critical-text: #7f1d1d;
+  --color-critical-border: #fecaca;
+  --color-high-bg: #fff7ed;
+  --color-high-text: #c2410c;
+  --color-high-border: #fdba74;
+  --color-medium-bg: #fefce8;
   --color-medium-text: #854d0e;
-  --color-low-bg: #dcfce7;
-  --color-low-text: #166534;
+  --color-medium-border: #fde047;
+  --color-low-bg: #f0fdf4;
+  --color-low-text: #15803d;
+  --color-low-border: #86efac;
 
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 18px;
+  /* Status */
+  --color-open-bg: #eff6ff;
+  --color-open-text: #1d4ed8;
+  --color-open-border: #bfdbfe;
+  --color-inprogress-bg: #fff7ed;
+  --color-inprogress-text: #c2410c;
+  --color-inprogress-border: #fdba74;
+  --color-resolved-bg: #f0fdf4;
+  --color-resolved-text: #15803d;
+  --color-resolved-border: #86efac;
+
+  /* Radius — crisp but friendly */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
   --radius-pill: 999px;
 
-  --shadow-sm: 0 2px 8px rgba(16, 36, 62, 0.06);
-  --shadow-md: 0 12px 32px rgba(16, 36, 62, 0.08);
+  /* Shadows — soft, layered elevation */
+  --shadow-sm: 0 1px 2px 0 rgb(15 23 42 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(15 23 42 / 0.06), 0 2px 4px -2px rgb(15 23 42 / 0.04);
+  --shadow-lg: 0 10px 15px -3px rgb(15 23 42 / 0.08), 0 4px 6px -4px rgb(15 23 42 / 0.05);
 
-  --focus-ring: 0 0 0 3px rgba(26, 95, 208, 0.28);
+  /* Focus ring — official, visible */
+  --focus-ring: 0 0 0 3px rgb(37 99 235 / 0.35);
 
+  /* Sidebar */
+  --sidebar-width: 260px;
+  --sidebar-collapsed-width: 72px;
+
+  /* Typography */
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
     "Noto Sans", sans-serif;
+  --font-heading: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    "Noto Sans", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+/* ---------- Dark theme ---------- */
+[data-theme="dark"] {
+  --color-ink: #f8fafc;
+  --color-ink-soft: #cbd5e1;
+  --color-text: #f1f5f9;
+  --color-muted: #94a3b8;
+  --color-line: #334155;
+  --color-line-soft: #1e293b;
+
+  --color-canvas: #0f172a;
+  --color-surface: #1e293b;
+  --color-surface-soft: #334155;
+
+  --color-brand: #3b82f6;
+  --color-brand-dark: #60a5fa;
+  --color-brand-soft: #1e3a8a;
+
+  --color-accent: #10b981;
+  --color-accent-dark: #34d399;
+  --color-accent-soft: #064e3b;
+
+  --color-warm: #fbbf24;
+  --color-warm-soft: #713f12;
+
+  --color-danger: #ef4444;
+  --color-danger-soft: #7f1d1d;
+
+  --color-critical-bg: #7f1d1d;
+  --color-critical-text: #fecaca;
+  --color-critical-border: #450a0a;
+
+  --color-high-bg: #7c2d12;
+  --color-high-text: #fdba74;
+  --color-high-border: #431407;
+
+  --color-medium-bg: #713f12;
+  --color-medium-text: #fde047;
+  --color-medium-border: #3d1801;
+
+  --color-low-bg: #14532d;
+  --color-low-text: #86efac;
+  --color-low-border: #064e3b;
+
+  --color-open-bg: #1e3a8a;
+  --color-open-text: #bfdbfe;
+  --color-open-border: #1e3a8a;
+
+  --color-inprogress-bg: #713f12;
+  --color-inprogress-text: #fdba74;
+  --color-inprogress-border: #451a03;
+
+  --color-resolved-bg: #064e3b;
+  --color-resolved-text: #86efac;
+  --color-resolved-border: #064e3b;
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.4);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.6), 0 4px 6px -4px rgb(0 0 0 / 0.5);
 }

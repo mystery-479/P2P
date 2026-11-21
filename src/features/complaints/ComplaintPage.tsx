@@ -136,6 +136,24 @@ export function ComplaintPage() {
           priority, and route it to the right team — a real officer reviews every
           recommendation.
         </p>
+        <ol className="progress-track">
+          <li className="progress-step progress-step--current">
+            <span className="progress-step__badge">1</span>
+            <span className="progress-step__label">Describe the issue</span>
+          </li>
+          <li className="progress-step">
+            <span className="progress-step__badge">2</span>
+            <span className="progress-step__label">Add location &amp; photo</span>
+          </li>
+          <li className="progress-step">
+            <span className="progress-step__badge">3</span>
+            <span className="progress-step__label">Review &amp; submit</span>
+          </li>
+          <li className="progress-step">
+            <span className="progress-step__badge">4</span>
+            <span className="progress-step__label">Get your ticket</span>
+          </li>
+        </ol>
         <div className="hero-sketch">
           <HeroSketch />
         </div>

@@ -6,8 +6,9 @@ function Brand() {
     <Link className="brand" to="/">
       <span className="brand__mark" aria-hidden="true">
         <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M16 3 27 8v9c0 7-4.6 10.9-11 13-6.4-2.1-11-6-11-13V8L16 3Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
-          <path d="m11 16 3.5 3.5L21 13" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+          <circle cx="16" cy="16" r="14" stroke="currentColor" strokeWidth="2.5" />
+          <path d="M11 12l2 2 4-4" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M16 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z" stroke="currentColor" strokeWidth="2" />
         </svg>
       </span>
       <span className="brand__text">
@@ -70,6 +71,7 @@ export function Layout() {
         Skip to main content
       </a>
       <header className="site-header">
+        <span className="header-accent" aria-hidden="true" />
         <div className="container site-header__inner">
           <Brand />
           <Navigation />
