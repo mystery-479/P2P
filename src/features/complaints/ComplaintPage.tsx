@@ -343,21 +343,18 @@ export function ComplaintPage() {
             <h2>What happens next</h2>
             <ol className="steps">
               <li>
-                <span className="steps__number">1</span>
                 <div>
                   <strong>Categorised</strong>
                   <p>Issue is matched to roads, waste, water, electricity, trees, drainage or other.</p>
                 </div>
               </li>
               <li>
-                <span className="steps__number">2</span>
                 <div>
                   <strong>Prioritised</strong>
                   <p>Severity of Low to Critical is suggested with a short reason.</p>
                 </div>
               </li>
               <li>
-                <span className="steps__number">3</span>
                 <div>
                   <strong>Routed</strong>
                   <p>The right municipal department is recommended for action.</p>
