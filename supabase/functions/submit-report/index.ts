@@ -74,7 +74,11 @@ Deno.serve(async (request) => {
 
     const token = bearerToken(request);
     let userId: string | null = null;
-    if (token && token !== anonKey) {
+    // For anonymous requests, supabase-js sends the configured publishable key
+    // as both `apikey` and the Bearer token. It is not the legacy anon JWT
+    // available in the Edge Function environment, so compare both forms.
+    const requestApiKey = request.headers.get("apikey");
+    if (token && token !== anonKey && token !== requestApiKey) {
       const { data, error } = await adminClient.auth.getUser(token);
       if (error || !data.user) return jsonResponse(request, 401, { error: "Please sign in again." });
       userId = data.user.id;
