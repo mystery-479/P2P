@@ -162,12 +162,13 @@ The three contributors should coordinate ownership and shared interfaces before 
 - Build the citizen complaint form, optional photo flow, validation, and confirmation screen.
 - Use the shared ticket contract and submit through the agreed data/API interface.
 
-### Person 2 — Project foundation and ticket processing
+### Person 2 — Project foundation and ticket processing (implemented)
 
-- Initialize the selected framework/tooling and document setup commands.
-- Define the shared ticket types, sample data, and ticket create/list/update interface.
-- Implement category, severity, reason, department routing, and review fallback.
-- Document whether processing is real AI, a connected service, or demo logic.
+- Initialized Vite + React + TypeScript with dev/build/typecheck/lint scripts.
+- Defined the shared ticket types, sample data, and `getTickets`/`createTicket`/`updateTicket`/`useTickets` store.
+- Implemented `src/lib/triage.ts`: Unicode-script language detection (English, romanised Indian languages, Devanagari, Tamil, Telugu, Bengali, Kannada, Malayalam, Gujarati, Urdu), weighted multilingual category scoring, severity with hazard/context/urgency signals and a capped context contribution, one-line reasons, department routing and a review fallback for unclear or low-confidence reports.
+- Triage is **demo rule-based logic, not an AI model**; it is labelled as such in the UI and docs. `triage()` is the single seam for a future real AI service.
+- Added `npm run test:triage` with 10 passing acceptance checks (all categories, Critical/High/Low severities, Hindi/Tamil input, unclear complaint).
 
 ### Person 3 — Officer dashboard and ticket management
 
@@ -231,6 +232,7 @@ npm run build     # type-check and create a production build in dist/
 npm run preview   # serve the production build locally
 npm run typecheck # TypeScript only
 npm run lint      # ESLint
+npm run test:triage # 10 rule-engine acceptance checks (no test framework needed)
 ```
 
 Notes for the demo:
@@ -246,7 +248,8 @@ Notes for the demo:
 | --- | --- |
 | `src/types/ticket.ts` | The agreed `Ticket`, `ComplaintDraft` and `TriageResult` types, category/severity/status constants and department map. |
 | `src/lib/ticketStore.ts` | `getTickets`, `getTicket`, `createTicket`, `updateTicket`, `useTickets` and `resetTickets`. New submissions appear in the dashboard immediately. |
-| `src/features/complaints/demoTriage.ts` | **Demo keyword rules only.** Person 2 can replace this with the real classification service without touching the form or store. |
+| `src/lib/triage.ts` | **Person 2 triage service — demo keyword rules, NOT an AI model.** Language detection, weighted category classification, severity scoring with one-line reasons, department routing and review fallback. `triage()` is the seam to replace with a real AI service later. |
+| `src/features/complaints/demoTriage.ts` | Compatibility shim re-exporting `triage()` for older imports. |
 | `src/components/` | Reusable `Button`, `Card`, `Field`, inputs, badges, `DemoNotice` and the app shell (`Layout`). |
 | `src/features/dashboard/ticketQuery.ts` | Pure priority sorting (`Critical → High → Medium → Low`, oldest first), combined search/filter helpers and status counts. |
 | `src/features/dashboard/DashboardPage.tsx` | Full officer queue: counts, search, four filters, review-only toggle, loading/empty/error states. |
@@ -267,6 +270,8 @@ Routes: `/report` (form), `/confirmation/:ticketId` (receipt), `/dashboard` (off
 - [x] Officer can inspect a ticket and change its category, severity, department, status or review flag.
 - [x] Changes are reflected in the dashboard and persisted in browser storage.
 - [x] Application runs from the documented instructions and the demo flow is tested.
+- [x] `npm run test:triage` passes all 10 classification/severity/review checks.
+- [x] Hindi and Tamil complaints are classified from their script and flagged for officer review.
 
 ## Limitations and safety
 

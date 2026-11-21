@@ -121,7 +121,7 @@ export function ConfirmationPage() {
           {ticket.needsReview && (
             <p className="review-note">
               <span aria-hidden="true">👁</span> This report is flagged for officer review because the
-              triage rules were not confident or the report was not in English.
+              demo triage rules were not confident, the issue was unclear, or the report was not in English.
             </p>
           )}
 
