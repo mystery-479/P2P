@@ -2,7 +2,8 @@ import { BrowserRouter, Link, Navigate, Route, Routes } from "react-router-dom";
 import { buttonClass } from "./components/Button";
 import { Card } from "./components/Card";
 import { Layout } from "./components/Layout";
-import { DashboardPlaceholder } from "./features/dashboard/DashboardPlaceholder";
+import { DashboardPage } from "./features/dashboard/DashboardPage";
+import { TicketDetailPage } from "./features/dashboard/TicketDetailPage";
 import { ComplaintPage } from "./features/complaints/ComplaintPage";
 import { ConfirmationPage } from "./features/complaints/ConfirmationPage";
 
@@ -28,7 +29,8 @@ export default function App() {
           <Route path="/" element={<Navigate to="/report" replace />} />
           <Route path="/report" element={<ComplaintPage />} />
           <Route path="/confirmation/:ticketId" element={<ConfirmationPage />} />
-          <Route path="/dashboard" element={<DashboardPlaceholder />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/dashboard/:ticketId" element={<TicketDetailPage />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

@@ -140,7 +140,7 @@ export function ConfirmationPage() {
             <p>Use it to track the issue or find it on the officer dashboard.</p>
             <div className="stack-actions">
               <Link className={buttonClass("primary", "md", "btn--full")} to={`/dashboard?ticket=${ticket.id}`}>
-                View on officer dashboard
+                Open ticket on officer dashboard
               </Link>
               <Button variant="secondary" fullWidth onClick={() => navigate("/report")}>
                 Report another issue

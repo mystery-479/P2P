@@ -2,7 +2,7 @@
 
 AI-assisted triage for citizen complaints. CivicLens turns a free-text report, with an optional photo and location, into a structured municipal ticket that can be prioritised and routed to the right department.
 
-> **Prototype status:** A Vite + React + TypeScript scaffold, shared ticket contract, app shell, citizen complaint flow and a placeholder officer dashboard are implemented on `feature/starter-and-complaint-form`. Triage currently uses clearly labelled demo keyword rules — it is not an AI model.
+> **Prototype status:** A Vite + React + TypeScript app with the shared ticket contract, app shell, citizen complaint flow and a full officer dashboard (search, filters, details, officer actions) is implemented. Triage currently uses clearly labelled demo keyword rules — it is not an AI model.
 
 ## Contents
 
@@ -248,22 +248,25 @@ Notes for the demo:
 | `src/lib/ticketStore.ts` | `getTickets`, `getTicket`, `createTicket`, `updateTicket`, `useTickets` and `resetTickets`. New submissions appear in the dashboard immediately. |
 | `src/features/complaints/demoTriage.ts` | **Demo keyword rules only.** Person 2 can replace this with the real classification service without touching the form or store. |
 | `src/components/` | Reusable `Button`, `Card`, `Field`, inputs, badges, `DemoNotice` and the app shell (`Layout`). |
-| `src/styles/` | Design tokens and global styles with responsive, accessible focus states. |
+| `src/features/dashboard/ticketQuery.ts` | Pure priority sorting (`Critical → High → Medium → Low`, oldest first), combined search/filter helpers and status counts. |
+| `src/features/dashboard/DashboardPage.tsx` | Full officer queue: counts, search, four filters, review-only toggle, loading/empty/error states. |
+| `src/features/dashboard/TicketDetailPage.tsx` | Full complaint, photo, location, severity reason, routing recommendation and officer actions (category, severity, department, status, review flag). |
+| `src/styles/` | Design tokens, global styles and dashboard styles with responsive, accessible focus states. |
 
-Routes: `/report` (form), `/confirmation/:ticketId` (receipt), `/dashboard` (placeholder for Person 3).
+Routes: `/report` (form), `/confirmation/:ticketId` (receipt), `/dashboard` (officer queue), `/dashboard/:ticketId` (ticket detail and actions). A legacy `/dashboard?ticket=<id>` link redirects to the detail page.
 
 ## Acceptance checklist
 
-- [ ] Citizen can submit a text complaint with or without a photo.
-- [ ] The form supports complaints written in English or a regional language, or clearly indicates prototype language limitations.
-- [ ] Submission produces a ticket ID and confirmation.
-- [ ] Ticket includes category, severity, one-line reason, department, status, and timestamp.
-- [ ] Unclear/low-confidence results can be flagged for review.
-- [ ] Dashboard sorts Critical, High, Medium, then Low; oldest first within each level.
-- [ ] Search and filters work together.
-- [ ] Officer can inspect a ticket and change its department or status.
-- [ ] Changes are reflected in the dashboard.
-- [ ] Application runs from the documented instructions and the demo flow is tested.
+- [x] Citizen can submit a text complaint with or without a photo.
+- [x] The form supports complaints written in English or a regional language, and clearly indicates prototype language limitations (non-English is flagged for review).
+- [x] Submission produces a ticket ID and confirmation.
+- [x] Ticket includes category, severity, one-line reason, department, status, and timestamp.
+- [x] Unclear/low-confidence results can be flagged for review.
+- [x] Dashboard sorts Critical, High, Medium, then Low; oldest first within each level.
+- [x] Search and filters work together, including a "Needs review only" toggle.
+- [x] Officer can inspect a ticket and change its category, severity, department, status or review flag.
+- [x] Changes are reflected in the dashboard and persisted in browser storage.
+- [x] Application runs from the documented instructions and the demo flow is tested.
 
 ## Limitations and safety
 
