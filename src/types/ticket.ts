@@ -1,5 +1,5 @@
 /**
- * Shared CivicLens domain contract.
+ * Shared TownThread domain contract.
  * Agreed with the team in the project README; do not change without coordinating.
  */
 
@@ -18,10 +18,15 @@ export type TicketCategory =
 
 export type Ticket = {
   id: string;
+  databaseId?: string;
   description: string;
   language: string;
   photoUrl?: string;
   location: string;
+  locality?: string;
+  ward?: string;
+  duplicateGroupId?: string;
+  duplicateCount?: number;
   category: TicketCategory;
   severity: Severity;
   severityReason: string;
@@ -31,12 +36,17 @@ export type Ticket = {
   needsReview?: boolean;
 };
 
-/** What the citizen form collects. Contact details are deliberately excluded. */
+/** What the citizen form collects. Contact details stay in the private schema. */
 export type ComplaintDraft = {
   description: string;
   language: string;
   photoUrl?: string;
   location: string;
+  locality: string;
+  ward: string;
+  reporterName?: string;
+  reporterEmail?: string;
+  reporterPhone?: string;
 };
 
 /** Recommendation returned by the triage step. */

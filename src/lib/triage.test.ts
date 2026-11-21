@@ -89,7 +89,13 @@ const cases: Case[] = [
 let passed = 0;
 let failures = 0;
 for (const testCase of cases) {
-  const result = triage({ description: testCase.text, language: "English", location: "Test ward" });
+  const result = triage({
+    description: testCase.text,
+    language: "English",
+    location: "Test street",
+    locality: "Test locality",
+    ward: "Ward 1",
+  });
   const problems: string[] = [];
   if (result.category !== testCase.category) problems.push(`category: expected ${testCase.category}, got ${result.category}`);
   if (testCase.severity && result.severity !== testCase.severity) problems.push(`severity: expected ${testCase.severity}, got ${result.severity}`);

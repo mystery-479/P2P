@@ -1,6 +1,6 @@
-# CivicLens
+# TownThread
 
-AI-assisted triage for citizen complaints. CivicLens turns a free-text report, with an optional photo and location, into a structured municipal ticket that can be prioritised and routed to the right department.
+AI-assisted triage for citizen complaints. TownThread turns a free-text report, with an optional photo and location, into a structured municipal ticket that can be prioritised and routed to the right department.
 
 > **Prototype status:** A Vite + React + TypeScript app with the shared ticket contract, app shell, citizen complaint flow and a full officer dashboard (search, filters, details, officer actions) is implemented. Triage currently uses clearly labelled demo keyword rules — it is not an AI model. Supabase auth/data groundwork is being added; the frontend is not yet connected to a Supabase project.
 
@@ -22,7 +22,7 @@ AI-assisted triage for citizen complaints. CivicLens turns a free-text report, w
 
 ## Problem and goals
 
-Municipal departments receive many reports about issues such as potholes, overflowing garbage, broken streetlights, water leaks, blocked drains, and fallen trees. Reports may be vague, duplicated, or sent to the wrong team. CivicLens aims to help officers review the most urgent issues first.
+Municipal departments receive many reports about issues such as potholes, overflowing garbage, broken streetlights, water leaks, blocked drains, and fallen trees. Reports may be vague, duplicated, or sent to the wrong team. TownThread aims to help officers review the most urgent issues first.
 
 The prototype should:
 
@@ -49,7 +49,7 @@ The prototype should:
 - Production municipal integrations or dispatch.
 - Authentication, role management, and official identity verification.
 - Guaranteed translation or diagnosis of every language or image.
-- Emergency response service. CivicLens is not a replacement for local emergency channels.
+- Emergency response service. TownThread is not a replacement for local emergency channels.
 - Production-grade duplicate detection, geocoding, or map services.
 
 ## User journeys
@@ -237,7 +237,7 @@ npm run test:triage # 10 rule-engine acceptance checks (no test framework needed
 
 Notes for the demo:
 
-- Tickets are stored in the browser's `localStorage` under `civiclens.tickets.v1`, seeded with synthetic sample tickets on first load.
+- Tickets are stored in the browser's `localStorage` under `townthread.tickets.v1`, seeded with synthetic sample tickets on first load.
 - `resetTickets()` in `src/lib/ticketStore.ts` restores the sample data (run it from the browser console during testing).
 - No real personal data is stored. Optional contact details are shown once on the confirmation screen and discarded.
 - Photo uploads are compressed in the browser and kept as data URLs for the demo.
