@@ -2,7 +2,7 @@
 
 AI-assisted triage for citizen complaints. CivicLens turns a free-text report, with an optional photo and location, into a structured municipal ticket that can be prioritised and routed to the right department.
 
-> **Prototype status:** A Vite + React + TypeScript app with the shared ticket contract, app shell, citizen complaint flow and a full officer dashboard (search, filters, details, officer actions) is implemented. Triage currently uses clearly labelled demo keyword rules — it is not an AI model.
+> **Prototype status:** A Vite + React + TypeScript app with the shared ticket contract, app shell, citizen complaint flow and a full officer dashboard (search, filters, details, officer actions) is implemented. Triage currently uses clearly labelled demo keyword rules — it is not an AI model. Supabase auth/data groundwork is being added; the frontend is not yet connected to a Supabase project.
 
 ## Contents
 
@@ -221,7 +221,7 @@ Adapt this to the framework selected by the team:
 
 ## Development setup
 
-Stack: **Vite + React 18 + TypeScript** with React Router. No backend, API key or `.env` file is needed for the demo.
+Stack: **Vite + React 18 + TypeScript** with React Router. The current demo UI still runs without a backend; Supabase integration setup is documented in [`docs/SUPABASE-SETUP.md`](docs/SUPABASE-SETUP.md).
 
 Requirements: Node.js 20+ and npm 10+.
 
@@ -241,6 +241,7 @@ Notes for the demo:
 - `resetTickets()` in `src/lib/ticketStore.ts` restores the sample data (run it from the browser console during testing).
 - No real personal data is stored. Optional contact details are shown once on the confirmation screen and discarded.
 - Photo uploads are compressed in the browser and kept as data URLs for the demo.
+- Supabase schema, role security, and duplicate grouping groundwork are in `supabase/migrations/`; apply them only to the intended Supabase project after review.
 
 ### Shared code to build on
 

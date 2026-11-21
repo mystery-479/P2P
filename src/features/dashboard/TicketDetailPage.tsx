@@ -74,7 +74,7 @@ export function TicketDetailPage() {
     setFeedback(null);
     try {
       updateTicket(ticket.id, form);
-      setFeedback({ kind: "success", text: "Changes saved. The dashboard now reflects this ticket." });
+      setFeedback({ kind: "success", text: "Saved. Your queue now shows the updated ticket." });
     } catch {
       setFeedback({ kind: "error", text: "We could not save those changes. Please try again." });
     } finally {
@@ -199,7 +199,9 @@ export function TicketDetailPage() {
         <aside className="detail-aside">
           <Card className="action-card">
             <h2>Officer actions</h2>
-            <p className="action-card__lede">Correct the triage and update the ticket status.</p>
+            <p className="action-card__lede">
+              Make it yours — correct the triage and update the status as you work it.
+            </p>
 
             {feedback && (
               <p className={feedback.kind === "success" ? "feedback feedback--success" : "form-alert"} role="status">

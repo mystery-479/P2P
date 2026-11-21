@@ -67,10 +67,10 @@ export function DashboardPage() {
       <div className="page-heading page-heading--row">
         <div>
           <p className="eyebrow">Municipal officers</p>
-          <h1>Officer dashboard</h1>
+          <h1>Your queue</h1>
           <p className="page-heading__lede">
-            Review the queue by priority — Critical, High, Medium, then Low — with the oldest ticket
-            first in each level.
+            The most urgent reports land at the top. Within each priority, the oldest ticket comes
+            first — so nothing slips through the cracks.
           </p>
         </div>
         <button type="button" className="link-button" onClick={handleReset}>
@@ -228,11 +228,11 @@ export function DashboardPage() {
           </div>
         ) : visible.length === 0 ? (
           <div className="empty-card">
-            <h2>{tickets.length === 0 ? "No tickets yet" : "No tickets match these filters"}</h2>
+            <h2>{tickets.length === 0 ? "No reports yet" : "Nothing matches those filters"}</h2>
             <p>
               {tickets.length === 0
-                ? "Once a citizen submits a report, it will appear here."
-                : "Try a different search term or clear your filters."}
+                ? "When a citizen sends in a report, it'll show up here for you."
+                : "Try a different search, or clear the filters to see everything."}
             </p>
             {tickets.length === 0 ? (
               <Link className={buttonClass("primary")} to="/report">

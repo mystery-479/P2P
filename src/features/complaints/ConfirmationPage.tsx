@@ -56,9 +56,9 @@ export function ConfirmationPage() {
         </span>
         <div>
           <h1 ref={headingRef} tabIndex={-1}>
-            Report submitted successfully
+            Thanks — we've got your report
           </h1>
-          <p>Your complaint has been converted into a structured ticket.</p>
+          <p>Your complaint has been turned into a ticket. Here's what happens next.</p>
         </div>
       </div>
 
@@ -120,8 +120,9 @@ export function ConfirmationPage() {
 
           {ticket.needsReview && (
             <p className="review-note">
-              <span aria-hidden="true">👁</span> This report is flagged for officer review because the
-              demo triage rules were not confident, the issue was unclear, or the report was not in English.
+              <span aria-hidden="true">👁</span> An officer will take a closer look at this one —
+              the details were unclear, or the report was written in a language our demo rules flag
+              for human review.
             </p>
           )}
 
@@ -136,8 +137,8 @@ export function ConfirmationPage() {
         <aside className="confirmation-aside" aria-label="Next steps">
           <DemoNotice />
           <Card className="next-steps-card">
-            <h2>Save your ticket ID</h2>
-            <p>Use it to track the issue or find it on the officer dashboard.</p>
+            <h2>Keep this ticket ID handy</h2>
+            <p>You can use it to track your report, or find it on the officer dashboard.</p>
             <div className="stack-actions">
               <Link className={buttonClass("primary", "md", "btn--full")} to={`/dashboard?ticket=${ticket.id}`}>
                 Open ticket on officer dashboard

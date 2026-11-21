@@ -13,7 +13,11 @@ body {
   margin: 0;
   font-family: var(--font-sans);
   color: var(--color-text);
-  background: var(--color-canvas);
+  background:
+    radial-gradient(circle at 8% 0%, rgba(26, 95, 208, 0.07) 0%, transparent 42%),
+    radial-gradient(circle at 92% 100%, rgba(245, 158, 11, 0.06) 0%, transparent 40%),
+    var(--color-canvas);
+  background-attachment: fixed;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
@@ -213,6 +217,19 @@ select {
 
 .page-heading {
   margin-bottom: 1.75rem;
+  position: relative;
+}
+
+.page--report .page-heading::after {
+  content: "";
+  position: absolute;
+  top: -1.5rem;
+  right: -0.5rem;
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.16) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
 }
 
 .eyebrow {
@@ -287,12 +304,15 @@ select {
 }
 
 .btn--primary {
-  background: var(--color-brand);
+  background: linear-gradient(135deg, var(--color-brand), var(--color-brand-dark));
   color: #fff;
+  box-shadow: 0 4px 12px rgba(26, 95, 208, 0.22);
 }
 
 .btn--primary:hover:not(:disabled) {
-  background: var(--color-brand-dark);
+  background: linear-gradient(135deg, var(--color-brand-dark), #0a3370);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(26, 95, 208, 0.3);
 }
 
 .btn--secondary {
