@@ -27,7 +27,7 @@ export function ComplaintPage() {
   const [contactDetail, setContactDetail] = useState("");
   const [errors, setErrors] = useState<Errors>({});
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
-  const [submitError, setSubmitError] = useState("");
+  // submitError state removed; the error banner uses a fixed friendly message.
   const [locating, setLocating] = useState(false);
   const [geoError, setGeoError] = useState("");
 
@@ -35,11 +35,11 @@ export function ComplaintPage() {
     const next: Errors = {};
     const text = description.trim();
 
-    if (text.length < 10) next.description = "Please describe the issue in at least 10 characters.";
+    if (text.length < 10) next.description = "A few more words would help — what did you notice?";
     else if (text.length > 2000) next.description = "Please keep the description under 2000 characters.";
 
     if (locationText.trim().length < 3) {
-      next.location = "Add an address, landmark or map pin so officers can find the issue.";
+      next.location = "Where did you see it? An address, landmark or map pin will do.";
     }
 
     const detail = contactDetail.trim();
@@ -72,7 +72,6 @@ export function ComplaintPage() {
     }
 
     setSubmitState("submitting");
-    setSubmitError("");
     try {
       // Small delay makes the analysing state visible in the demo.
       await new Promise((resolve) => setTimeout(resolve, 700));
@@ -92,7 +91,6 @@ export function ComplaintPage() {
       });
     } catch {
       setSubmitState("error");
-      setSubmitError("We could not save your report. Please try again.");
     }
   }
 
@@ -122,10 +120,11 @@ export function ComplaintPage() {
     <div className="page page--report">
       <div className="page-heading">
         <p className="eyebrow">Citizen reporting</p>
-        <h1>Report an issue in your neighbourhood</h1>
+        <h1>Spotted something that needs fixing?</h1>
         <p className="page-heading__lede">
-          Tell us what you saw. We will turn it into a structured ticket with a suggested priority
-          and the right department — an officer reviews every recommendation.
+          Tell us what you saw, in your own words. We'll turn it into a ticket, suggest a
+          priority, and route it to the right team — and a real officer reviews every
+          recommendation.
         </p>
       </div>
 
@@ -208,7 +207,7 @@ export function ComplaintPage() {
                 </Field>
               </div>
 
-              <Field id="complaint-photo" label="Photo" optional hint="A clear photo helps officers verify the issue.">
+              <Field id="complaint-photo" label="Photo" optional hint="A photo makes it much easier for an officer to see what you see.">
                 <PhotoUpload value={photoUrl} onChange={setPhotoUrl} error={errors.photo} />
               </Field>
 
@@ -258,13 +257,14 @@ export function ComplaintPage() {
 
             {submitState === "error" && (
               <p className="form-alert" role="alert">
-                <span aria-hidden="true">⚠</span> {submitError}
+                <span aria-hidden="true">⚠</span> Sorry, something went wrong saving your report.
+                Please try again.
               </p>
             )}
 
             <div className="form-actions">
               <Button type="submit" size="lg" loading={submitState === "submitting"} fullWidth>
-                {submitState === "submitting" ? "Analysing your report…" : "Submit report"}
+                {submitState === "submitting" ? "We're looking at your report now…" : "Send my report"}
               </Button>
               <p className="form-actions__note">You will get a ticket ID on the next screen.</p>
             </div>
