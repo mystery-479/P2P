@@ -80,6 +80,7 @@ const cases: Case[] = [
     name: "unclear complaint goes to manual review",
     text: "Something is wrong near the bridge but I cannot describe it clearly.",
     category: "Other",
+    severity: "Medium",
     needsReview: true,
     language: "English",
   },

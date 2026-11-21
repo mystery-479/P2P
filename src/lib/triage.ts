@@ -268,7 +268,7 @@ function assessSeverity(
   text: string,
   category: TicketCategory,
 ): { severity: TriageResult["severity"]; reason: string; signals: string[] } {
-  const base = category === "Other" ? 20 : CATEGORY_RULES[category].base;
+  const base = category === "Other" ? 26 : CATEGORY_RULES[category].base;
   let coreScore = base;
   let contextScore = 0;
   const reasons: Array<{ rank: number; text: string }> = [];
@@ -319,7 +319,9 @@ function assessSeverity(
   const unique = [...new Set(reasons.map((item) => item.text))];
   let reason: string;
   if (unique.length === 0) {
-    reason = `Routine ${category.toLowerCase()} issue with no immediate hazard reported`;
+    reason = category === "Other"
+      ? "Complaint is too vague to classify — officer review recommended"
+      : `Routine ${category.toLowerCase()} issue with no immediate hazard reported`;
   } else if (unique.length === 1) {
     reason = unique[0];
   } else {
