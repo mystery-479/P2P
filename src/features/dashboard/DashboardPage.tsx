@@ -6,20 +6,21 @@ import { CategoryBadge, SeverityBadge, StatusBadge } from "../../components/Badg
 import { Card } from "../../components/Card";
 import { Select, TextInput } from "../../components/Inputs";
 import { formatDateTime, summaryOf } from "../../lib/format";
-import { resetTickets, useTickets } from "../../lib/ticketStore";
+import { listTickets } from "../../lib/ticketApi";
 import {
   CATEGORIES,
   DEPARTMENTS,
   SEVERITIES,
   STATUSES,
   type TicketCategory,
+  type Ticket,
   type Severity,
   type TicketStatus,
 } from "../../types/ticket";
 import { countByStatus, EMPTY_FILTERS, filterTickets, type TicketFilters } from "./ticketQuery";
 
 export function DashboardPage() {
-  const tickets = useTickets();
+  const [tickets, setTickets] = useState<Ticket[]>([]);
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [filters, setFilters] = useState<TicketFilters>(EMPTY_FILTERS);
@@ -33,8 +34,20 @@ export function DashboardPage() {
   }, [deepLinkedTicket, navigate]);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setLoading(false), 350);
-    return () => window.clearTimeout(timer);
+    let active = true;
+    void listTickets()
+      .then((items) => {
+        if (active) setTickets(items);
+      })
+      .catch((cause) => {
+        if (active) setError(cause instanceof Error ? cause.message : "Could not load tickets.");
+      })
+      .finally(() => {
+        if (active) setLoading(false);
+      });
+    return () => {
+      active = false;
+    };
   }, []);
 
   const visible = useMemo(() => filterTickets(tickets, filters), [tickets, filters]);
@@ -53,16 +66,6 @@ export function DashboardPage() {
     setFilters((current) => ({ ...current, [key]: value }));
   }
 
-  function handleReset() {
-    if (!window.confirm("Reset demo data to the original sample tickets?")) return;
-    try {
-      resetTickets();
-      setError("");
-    } catch {
-      setError("Could not reset the demo data. Please refresh the page.");
-    }
-  }
-
   return (
     <div className="page page--dashboard">
       <div className="page-heading page-heading--row">
@@ -74,9 +77,6 @@ export function DashboardPage() {
             first — so nothing slips through the cracks.
           </p>
         </div>
-        <button type="button" className="link-button" onClick={handleReset}>
-          Reset demo data
-        </button>
       </div>
 
       <div className="stat-grid" aria-label="Ticket status counts">
@@ -261,10 +261,15 @@ export function DashboardPage() {
                     <span aria-hidden="true">·</span>
                     <time dateTime={ticket.createdAt}>{formatDateTime(ticket.createdAt)}</time>
                   </p>
-                  {(ticket.needsReview || ticket.photoUrl) && (
+                  {(ticket.needsReview || ticket.photoUrl || (ticket.duplicateCount ?? 0) > 1) && (
                     <p className="ticket-row__flags">
                       {ticket.needsReview && <span className="flag flag--review">Needs review</span>}
                       {ticket.photoUrl && <span className="flag">Photo attached</span>}
+                      {ticket.duplicateCount && ticket.duplicateCount > 1 && (
+                        <span className="flag flag--duplicate">
+                          Likely duplicate · {ticket.duplicateCount} reports
+                        </span>
+                      )}
                     </p>
                   )}
                 </div>

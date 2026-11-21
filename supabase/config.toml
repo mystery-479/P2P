@@ -1,0 +1,10 @@
+project_id = "jmwnisjukfqycpjtxdws"
+
+[functions.submit-report]
+verify_jwt = false
+
+[functions.claim-report]
+verify_jwt = false
+
+[functions.admin-users]
+verify_jwt = false

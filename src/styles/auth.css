@@ -1,0 +1,137 @@
+.nav__button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.auth-card,
+.claim-form-card,
+.my-reports-card,
+.admin-invite-card,
+.admin-accounts-card {
+  padding: clamp(1.1rem, 2.5vw, 1.75rem);
+}
+
+.auth-form {
+  display: grid;
+  gap: 1.15rem;
+}
+
+.auth-switch,
+.auth-official-note {
+  margin: 1.25rem 0 0;
+  color: var(--color-muted);
+  font-size: 0.92rem;
+}
+
+.auth-official-note {
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-line);
+}
+
+.claim-form,
+.admin-invite-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 1rem;
+}
+
+.admin-invite-form {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) auto;
+}
+
+.claim-form-card,
+.admin-invite-card,
+.my-reports-card,
+.admin-accounts-card {
+  margin-bottom: 1rem;
+}
+
+.claim-form-card h2,
+.my-reports-card h2,
+.admin-invite-card h2,
+.admin-accounts-card h2 {
+  margin-bottom: 0.5rem;
+}
+
+.claim-form-card > p,
+.admin-invite-card > p {
+  color: var(--color-muted);
+}
+
+.ticket-row--static {
+  cursor: default;
+}
+
+.claim-code-card {
+  margin-top: 1.2rem;
+  padding: 1.15rem;
+  border: 1px solid var(--color-warning-border, #edc87a);
+  border-radius: var(--radius-md);
+  background: var(--color-warning-soft, #fff8e8);
+}
+
+.claim-code-card h2 {
+  margin-bottom: 0.5rem;
+}
+
+.claim-code-card > p {
+  margin-bottom: 0.75rem;
+}
+
+.claim-code-card > strong {
+  display: block;
+  margin-top: 0.65rem;
+  font-size: 0.85rem;
+}
+
+.claim-code-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.65rem 0.8rem;
+  border: 1px dashed var(--color-line-strong, #d2b66f);
+  border-radius: var(--radius-sm);
+  background: #fff;
+}
+
+.claim-code-row code {
+  overflow-wrap: anywhere;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.flag--duplicate {
+  border-color: #d6c3f1;
+  background: #f6f0ff;
+  color: #5a328b;
+}
+
+.admin-account-list {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.admin-account-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-top: 1px solid var(--color-line);
+}
+
+.admin-account-row p {
+  margin: 0.25rem 0 0;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 760px) {
+  .claim-form,
+  .admin-invite-form {
+    grid-template-columns: 1fr;
+  }
+}

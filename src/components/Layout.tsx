@@ -1,4 +1,5 @@
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
+import { useAuth } from "../features/auth/AuthProvider";
 
 function Brand() {
   return (
@@ -18,17 +19,46 @@ function Brand() {
 }
 
 function Navigation() {
+  const { user, role, signOut, configured } = useAuth();
+  const navigate = useNavigate();
   const navClass = ({ isActive }: { isActive: boolean }) =>
     `nav__link${isActive ? " nav__link--active" : ""}`;
+
+  async function handleSignOut() {
+    await signOut();
+    navigate("/login");
+  }
 
   return (
     <nav className="nav" aria-label="Main navigation">
       <NavLink to="/report" end className={navClass}>
         Report an issue
       </NavLink>
-      <NavLink to="/dashboard" className={navClass}>
-        Officer dashboard
-      </NavLink>
+      {role === "citizen" && (
+        <NavLink to="/my-reports" className={navClass}>
+          My reports
+        </NavLink>
+      )}
+      {(role === "official" || role === "admin") && (
+        <NavLink to="/dashboard" className={navClass}>
+          Officer dashboard
+        </NavLink>
+      )}
+      {role === "admin" && (
+        <NavLink to="/admin" className={navClass}>
+          Admin
+        </NavLink>
+      )}
+      {configured &&
+        (user ? (
+          <button type="button" className="nav__link nav__button" onClick={() => void handleSignOut()}>
+            Sign out
+          </button>
+        ) : (
+          <NavLink to="/login" className={navClass}>
+            Sign in
+          </NavLink>
+        ))}
     </nav>
   );
 }

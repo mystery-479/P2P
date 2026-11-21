@@ -7,8 +7,9 @@ import { DemoNotice } from "../../components/DemoNotice";
 import { Field } from "../../components/Field";
 import { HeroSketch } from "../../components/HeroSketch";
 import { Select, TextArea, TextInput } from "../../components/Inputs";
-import { createTicket } from "../../lib/ticketStore";
+import { submitReport } from "../../lib/ticketApi";
 import { LANGUAGES } from "../../types/ticket";
+import { useAuth } from "../auth/AuthProvider";
 import { PhotoUpload } from "./PhotoUpload";
 
 type Errors = Record<string, string>;
@@ -19,11 +20,14 @@ const PHONE_PATTERN = /^\+?[\d][\d\s-]{5,}$/;
 
 export function ComplaintPage() {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const formRef = useRef<HTMLFormElement>(null);
 
   const [description, setDescription] = useState("");
   const [language, setLanguage] = useState<string>("English");
   const [locationText, setLocationText] = useState("");
+  const [locality, setLocality] = useState("");
+  const [ward, setWard] = useState("");
   const [photoUrl, setPhotoUrl] = useState<string | undefined>();
   const [contactName, setContactName] = useState("");
   const [contactDetail, setContactDetail] = useState("");
@@ -42,6 +46,9 @@ export function ComplaintPage() {
 
     if (locationText.trim().length < 3) {
       next.location = "Where did you see it? An address, landmark or map pin will do.";
+    }
+    if (locality.trim().length < 2) {
+      next.locality = "Add your neighbourhood or locality so nearby reports can be grouped.";
     }
 
     const detail = contactDetail.trim();
@@ -77,20 +84,21 @@ export function ComplaintPage() {
     try {
       // Small delay makes the analysing state visible in the demo.
       await new Promise((resolve) => setTimeout(resolve, 700));
-      const ticket = createTicket({
+      const result = await submitReport({
         description,
         language,
         location: locationText,
+        locality: locality.trim(),
+        ward: ward.trim(),
         ...(photoUrl ? { photoUrl } : {}),
+        ...(contactName.trim() ? { reporterName: contactName.trim() } : {}),
+        ...(contactDetail.trim()
+          ? EMAIL_PATTERN.test(contactDetail.trim())
+            ? { reporterEmail: contactDetail.trim() }
+            : { reporterPhone: contactDetail.trim() }
+          : {}),
       });
-      navigate(`/confirmation/${ticket.id}`, {
-        state: {
-          contact: {
-            name: contactName.trim(),
-            detail: contactDetail.trim(),
-          },
-        },
-      });
+      navigate(`/confirmation/${result.ticket.id}`, { state: result });
     } catch {
       setSubmitState("error");
     }
@@ -212,6 +220,40 @@ export function ComplaintPage() {
                 </Field>
               </div>
 
+              <div className="field-row">
+                <Field
+                  id="complaint-locality"
+                  label="Neighbourhood or locality"
+                  hint="Used to group similar reports from the same area."
+                  error={errors.locality}
+                >
+                  <TextInput
+                    id="complaint-locality"
+                    name="locality"
+                    autoComplete="address-level2"
+                    maxLength={120}
+                    placeholder="e.g. Jayanagar"
+                    value={locality}
+                    onChange={(event) => {
+                      setLocality(event.target.value);
+                      setErrors((current) => ({ ...current, locality: "" }));
+                    }}
+                    invalid={Boolean(errors.locality)}
+                    required
+                  />
+                </Field>
+                <Field id="complaint-ward" label="Ward" optional hint="Add your ward if you know it.">
+                  <TextInput
+                    id="complaint-ward"
+                    name="ward"
+                    maxLength={40}
+                    placeholder="e.g. Ward 6"
+                    value={ward}
+                    onChange={(event) => setWard(event.target.value)}
+                  />
+                </Field>
+              </div>
+
               <Field id="complaint-photo" label="Photo" optional hint="A photo makes it much easier for an officer to see what you see.">
                 <PhotoUpload value={photoUrl} onChange={setPhotoUrl} error={errors.photo} />
               </Field>
@@ -221,8 +263,8 @@ export function ComplaintPage() {
               <fieldset className="contact-group">
                 <legend>Contact details (optional)</legend>
                 <p className="contact-group__note">
-                  Only used if an officer needs to follow up with you. Not shown on the public
-                  dashboard and not stored in the demo ticket.
+                  Stored privately for officer follow-up. Anonymous reports get a one-time claim code
+                  on the next screen; save it if you want to add this report to an account later.
                 </p>
                 <div className="field-row">
                   <Field id="complaint-contactName" label="Your name" optional>
@@ -312,6 +354,15 @@ export function ComplaintPage() {
               contact your local emergency number first.
             </p>
           </Card>
+          {!user && (
+            <Card className="safety-card">
+              <h2>Track it later</h2>
+              <p>
+                You can report without signing in. Save the one-time claim code after submission,
+                then sign in to add the report to your private request list.
+              </p>
+            </Card>
+          )}
         </aside>
       </div>
     </div>
