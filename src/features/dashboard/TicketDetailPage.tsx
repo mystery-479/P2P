@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { AlertIcon, CheckIcon } from "../../components/Icons";
 import { SeverityBadge, StatusBadge } from "../../components/Badges";
 import { Button, buttonClass } from "../../components/Button";
 import { Card } from "../../components/Card";
@@ -205,7 +206,7 @@ export function TicketDetailPage() {
 
             {feedback && (
               <p className={feedback.kind === "success" ? "feedback feedback--success" : "form-alert"} role="status">
-                {feedback.kind === "success" ? "✓ " : "⚠ "}
+                {feedback.kind === "success" ? <CheckIcon size={13} className="feedback__icon" /> : <AlertIcon size={13} className="feedback__icon" />}
                 {feedback.text}
               </p>
             )}

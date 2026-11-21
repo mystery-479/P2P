@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import { buttonClass, Button } from "../../components/Button";
+import { CheckIcon, EyeIcon } from "../../components/Icons";
+import { Button, buttonClass } from "../../components/Button";
 import { Card } from "../../components/Card";
 import { DemoNotice } from "../../components/DemoNotice";
 import { SeverityBadge, StatusBadge } from "../../components/Badges";
@@ -51,9 +52,7 @@ export function ConfirmationPage() {
   return (
     <div className="page page--confirmation">
       <div className="success-banner" role="status">
-        <span className="success-banner__icon" aria-hidden="true">
-          ✓
-        </span>
+        <CheckIcon className="success-banner__icon" size={30} />
         <div>
           <h1 ref={headingRef} tabIndex={-1}>
             Thanks — we've got your report
@@ -120,7 +119,7 @@ export function ConfirmationPage() {
 
           {ticket.needsReview && (
             <p className="review-note">
-              <span aria-hidden="true">👁</span> An officer will take a closer look at this one —
+              <EyeIcon className="review-note__icon" /> An officer will take a closer look at this one —
               the details were either unclear or written in a language our demo rules can't read.
             </p>
           )}

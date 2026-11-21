@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { buttonClass } from "../../components/Button";
+import { AlertIcon, SearchIcon } from "../../components/Icons";
 import { CategoryBadge, SeverityBadge, StatusBadge } from "../../components/Badges";
 import { Card } from "../../components/Card";
 import { Select, TextInput } from "../../components/Inputs";
@@ -96,9 +97,7 @@ export function DashboardPage() {
       <Card className="dashboard-panel">
         <div className="dashboard-toolbar">
           <div className="search-field">
-            <span className="search-field__icon" aria-hidden="true">
-              ⌕
-            </span>
+            <SearchIcon className="search-field__icon" size={17} />
             <TextInput
               id="ticket-search"
               type="search"
@@ -206,7 +205,7 @@ export function DashboardPage() {
 
         {error && (
           <p className="form-alert" role="alert">
-            <span aria-hidden="true">⚠</span> {error}
+            <AlertIcon /> {error}
           </p>
         )}
 

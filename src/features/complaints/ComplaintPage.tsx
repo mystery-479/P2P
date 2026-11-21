@@ -1,9 +1,11 @@
 import { useRef, useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import { AlertIcon } from "../../components/Icons";
 import { Button } from "../../components/Button";
 import { Card } from "../../components/Card";
 import { DemoNotice } from "../../components/DemoNotice";
 import { Field } from "../../components/Field";
+import { HeroSketch } from "../../components/HeroSketch";
 import { Select, TextArea, TextInput } from "../../components/Inputs";
 import { createTicket } from "../../lib/ticketStore";
 import { LANGUAGES } from "../../types/ticket";
@@ -123,9 +125,12 @@ export function ComplaintPage() {
         <h1>Spotted something that needs fixing?</h1>
         <p className="page-heading__lede">
           Tell us what you saw, in your own words. We'll turn it into a ticket, suggest a
-          priority, and route it to the right team — and a real officer reviews every
+          priority, and route it to the right team — a real officer reviews every
           recommendation.
         </p>
+        <div className="hero-sketch">
+          <HeroSketch />
+        </div>
       </div>
 
       <div className="report-layout">
@@ -257,7 +262,8 @@ export function ComplaintPage() {
 
             {submitState === "error" && (
               <p className="form-alert" role="alert">
-                <span aria-hidden="true">⚠</span> Sorry, something went wrong saving your report.
+                <AlertIcon />
+                Sorry, something went wrong saving your report.
                 Please try again.
               </p>
             )}

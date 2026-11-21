@@ -1087,3 +1087,68 @@ select {
     scroll-behavior: auto !important;
   }
 }
+
+/* ---------- Hand-drawn hero sketch (report page) ---------- */
+.hero-sketch {
+  width: 100%;
+  max-width: 420px;
+  margin-top: 1.6rem;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  filter: drop-shadow(0 10px 20px rgba(16, 36, 62, 0.06));
+  display: block;
+}
+
+.hero-sketch svg {
+  width: 100%;
+  height: auto;
+  max-height: 220px;
+  display: block;
+}
+
+.page--report .page-heading__lede {
+  max-width: 48ch;
+}
+
+.success-banner__icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.feedback__icon {
+  margin-right: 0.55rem;
+  flex: none;
+}
+
+.review-note__icon {
+  margin-right: 0.5rem;
+  flex: none;
+}
+
+.search-field__icon {
+  top: 50%;
+  left: 0.9rem;
+  color: var(--color-muted);
+}
+
+/* hand-drawn flags feel more like little stickers */
+.flag {
+  border-style: solid;
+}
+
+/* softer shadows already in tokens; reinforce card depth */
+.card {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* focus rings look intentional, not accidental */
+:focus-visible {
+  outline: 3px solid var(--color-brand);
+  outline-offset: 3px;
+}
