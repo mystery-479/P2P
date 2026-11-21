@@ -2,7 +2,7 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 
 function Brand() {
   return (
-    <Link className="brand" to="/" aria-label="CivicLens home">
+    <Link className="brand" to="/">
       <span className="brand__mark" aria-hidden="true">
         <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M16 3 27 8v9c0 7-4.6 10.9-11 13-6.4-2.1-11-6-11-13V8L16 3Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
