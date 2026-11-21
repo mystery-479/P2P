@@ -1,6 +1,6 @@
 import { useSyncExternalStore } from "react";
 import { sampleTickets } from "../data/sampleTickets";
-import { triageComplaint } from "../features/complaints/demoTriage";
+import { triage } from "./triage";
 import type { ComplaintDraft, Ticket } from "../types/ticket";
 
 /**
@@ -70,7 +70,7 @@ export function createTicket(draft: ComplaintDraft): Ticket {
     language: draft.language,
     ...(draft.photoUrl ? { photoUrl: draft.photoUrl } : {}),
     location: draft.location.trim(),
-    ...triageComplaint(draft),
+    ...triage(draft),
     status: "Open",
     createdAt: new Date().toISOString(),
   };
