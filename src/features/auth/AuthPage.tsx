@@ -49,7 +49,7 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
     <div className="page page--narrow">
       <div className="page-heading">
         <p className="eyebrow">Citizen account</p>
-        <h1>{mode === "login" ? "Sign in to TownThread" : "Create your account"}</h1>
+        <h1>{mode === "login" ? "Sign in to ReportBox" : "Create your account"}</h1>
         <p className="page-heading__lede">
           {mode === "login"
             ? "Sign in to view the reports linked to your account."
@@ -107,13 +107,13 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
         </form>
         <p className="auth-switch">
           {mode === "login" ? (
-            <>New to TownThread? <Link to="/signup">Create a citizen account</Link>.</>
+            <>New to ReportBox? <Link to="/signup">Create a citizen account</Link>.</>
           ) : (
             <>Already registered? <Link to="/login">Sign in</Link>.</>
           )}
         </p>
         <p className="auth-official-note">
-          Officials do not self-register. Contact your TownThread administrator for an invitation.
+          Officials do not self-register. Contact your ReportBox administrator for an invitation.
         </p>
       </Card>
     </div>

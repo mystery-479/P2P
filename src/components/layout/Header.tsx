@@ -9,7 +9,7 @@ export function Header() {
   const displayName =
     (typeof user?.user_metadata?.display_name === "string" && user.user_metadata.display_name) ||
     user?.email ||
-    "TownThread";
+    "ReportBox";
 
   async function handleSignOut() {
     await signOut();

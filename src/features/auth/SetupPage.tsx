@@ -6,7 +6,7 @@ export function SetupPage() {
     <div className="page page--narrow">
       <Card className="auth-card">
         <p className="eyebrow">Setup required</p>
-        <h1>Connect TownThread to Supabase</h1>
+        <h1>Connect ReportBox to Supabase</h1>
         <p>
           Authentication and secure ticket access are not enabled until this app is configured
           with the Supabase project URL and publishable key.

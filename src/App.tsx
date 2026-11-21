@@ -19,7 +19,7 @@ function NotFound() {
     <div className="page page--narrow">
       <Card className="empty-card">
         <h1>Page not found</h1>
-        <p>That page does not exist in TownThread.</p>
+        <p>That page does not exist in ReportBox.</p>
         <Link className={buttonClass("primary")} to="/report">
           Report an issue
         </Link>

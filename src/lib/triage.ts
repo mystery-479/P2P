@@ -1,5 +1,5 @@
 /**
- * TownThread triage service — DEMO / RULE-BASED LOGIC, NOT AN AI MODEL.
+ * ReportBox triage service — DEMO / RULE-BASED LOGIC, NOT AN AI MODEL.
  *
  * Person 2 owns this module. It is deliberately deterministic, offline and
  * explainable so the team can demo the full flow without API keys, and so a
