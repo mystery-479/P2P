@@ -2,7 +2,7 @@
 
 AI-assisted triage for citizen complaints. CivicLens turns a free-text report, with an optional photo and location, into a structured municipal ticket that can be prioritised and routed to the right department.
 
-> **Prototype status:** This repository is at the project-planning stage. The repository is currently empty apart from this README. Framework, backend, storage, and AI provider have not yet been selected, so run instructions will be added once the team agrees on the stack.
+> **Prototype status:** A Vite + React + TypeScript scaffold, shared ticket contract, app shell, citizen complaint flow and a placeholder officer dashboard are implemented on `feature/starter-and-complaint-form`. Triage currently uses clearly labelled demo keyword rules — it is not an AI model.
 
 ## Contents
 
@@ -220,14 +220,37 @@ Adapt this to the framework selected by the team:
 
 ## Development setup
 
-Setup commands are **not available yet** because the repository has no application scaffold and the team has not chosen a stack. Add the following once setup is merged:
+Stack: **Vite + React 18 + TypeScript** with React Router. No backend, API key or `.env` file is needed for the demo.
 
-- Required runtime/tool versions.
-- Install command.
-- Environment-variable instructions (with a safe `.env.example`, never real secrets).
-- Local development command.
-- Test, lint, and production build commands.
-- Demo login or seed-data instructions, if applicable.
+Requirements: Node.js 20+ and npm 10+.
+
+```bash
+npm install       # install dependencies
+npm run dev       # start the dev server at http://localhost:5173
+npm run build     # type-check and create a production build in dist/
+npm run preview   # serve the production build locally
+npm run typecheck # TypeScript only
+npm run lint      # ESLint
+```
+
+Notes for the demo:
+
+- Tickets are stored in the browser's `localStorage` under `civiclens.tickets.v1`, seeded with synthetic sample tickets on first load.
+- `resetTickets()` in `src/lib/ticketStore.ts` restores the sample data (run it from the browser console during testing).
+- No real personal data is stored. Optional contact details are shown once on the confirmation screen and discarded.
+- Photo uploads are compressed in the browser and kept as data URLs for the demo.
+
+### Shared code to build on
+
+| Path | What it provides |
+| --- | --- |
+| `src/types/ticket.ts` | The agreed `Ticket`, `ComplaintDraft` and `TriageResult` types, category/severity/status constants and department map. |
+| `src/lib/ticketStore.ts` | `getTickets`, `getTicket`, `createTicket`, `updateTicket`, `useTickets` and `resetTickets`. New submissions appear in the dashboard immediately. |
+| `src/features/complaints/demoTriage.ts` | **Demo keyword rules only.** Person 2 can replace this with the real classification service without touching the form or store. |
+| `src/components/` | Reusable `Button`, `Card`, `Field`, inputs, badges, `DemoNotice` and the app shell (`Layout`). |
+| `src/styles/` | Design tokens and global styles with responsive, accessible focus states. |
+
+Routes: `/report` (form), `/confirmation/:ticketId` (receipt), `/dashboard` (placeholder for Person 3).
 
 ## Acceptance checklist
 
