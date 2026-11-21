@@ -1,5 +1,5 @@
 /**
- * Shared TownThread domain contract.
+ * Shared ReportBox domain contract.
  * Agreed with the team in the project README; do not change without coordinating.
  */
 

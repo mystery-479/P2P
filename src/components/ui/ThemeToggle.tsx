@@ -56,7 +56,7 @@ export function ThemeToggle({ className }: { className?: string }) {
   useEffect(() => {
     // Read saved preference on first mount
     try {
-      const saved = localStorage.getItem("townthread.theme");
+      const saved = localStorage.getItem("reportbox.theme");
       if (saved === "light" || saved === "dark") {
         setTheme(saved);
       } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
@@ -70,7 +70,7 @@ export function ThemeToggle({ className }: { className?: string }) {
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     try {
-      localStorage.setItem("townthread.theme", theme);
+      localStorage.setItem("reportbox.theme", theme);
     } catch {
       // localStorage unavailable
     }

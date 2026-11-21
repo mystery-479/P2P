@@ -16,7 +16,7 @@ export function RoleProvider({ children }: { children: ReactNode }) {
     console.log("RoleContext: setUserRole called with", next);
     setRole(next);
     try {
-      localStorage.setItem("townthread.role", next);
+      localStorage.setItem("reportbox.role", next);
     } catch {
       // localStorage unavailable
     }
@@ -24,7 +24,7 @@ export function RoleProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     try {
-      const saved = localStorage.getItem("townthread.role");
+      const saved = localStorage.getItem("reportbox.role");
       if (saved === "citizen" || saved === "officer") {
         setRole(saved);
       }
