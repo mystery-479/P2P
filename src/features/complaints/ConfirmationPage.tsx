@@ -20,7 +20,7 @@ export function ConfirmationPage() {
   const contact = (location.state as ContactState | null)?.contact;
 
   useEffect(() => {
-    document.title = ticket ? `Ticket ${ticket.id} — CivicLens` : "Ticket not found — CivicLens";
+    document.title = ticket ? `Ticket ${ticket.id} — TownThread` : "Ticket not found — TownThread";
     headingRef.current?.focus();
   }, [ticket]);
 

@@ -277,7 +277,7 @@ export function ComplaintPage() {
           </form>
         </Card>
 
-        <aside className="report-aside" aria-label="How CivicLens works">
+        <aside className="report-aside" aria-label="How TownThread works">
           <DemoNotice />
           <Card className="steps-card">
             <h2>What happens next</h2>
@@ -308,7 +308,7 @@ export function ComplaintPage() {
           <Card className="safety-card">
             <h2>Urgent danger?</h2>
             <p>
-              CivicLens is not an emergency service. For fires, accidents or immediate risk to life,
+              TownThread is not an emergency service. For fires, accidents or immediate risk to life,
               contact your local emergency number first.
             </p>
           </Card>

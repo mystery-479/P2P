@@ -10,7 +10,7 @@ function Brand() {
         </svg>
       </span>
       <span className="brand__text">
-        <strong>CivicLens</strong>
+        <strong>TownThread</strong>
         <small>Citizen complaint triage</small>
       </span>
     </Link>
@@ -52,7 +52,7 @@ export function Layout() {
 
       <footer className="site-footer">
         <div className="container site-footer__inner">
-          <span>CivicLens · Prototype demo</span>
+          <span>TownThread · Prototype demo</span>
           <span>Not an emergency service — call local emergency numbers for immediate danger.</span>
         </div>
       </footer>

@@ -1,6 +1,6 @@
 # Supabase setup and security model
 
-This guide is for the CivicLens Supabase project. The SQL migration is in
+This guide is for the TownThread Supabase project. The SQL migration is in
 `supabase/migrations/20261121000000_auth_and_tickets.sql`.
 
 ## Roles and access

@@ -1,5 +1,5 @@
 /**
- * Shared CivicLens domain contract.
+ * Shared TownThread domain contract.
  * Agreed with the team in the project README; do not change without coordinating.
  */
 

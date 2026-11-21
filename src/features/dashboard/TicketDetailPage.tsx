@@ -60,7 +60,7 @@ export function TicketDetailPage() {
     setForm(initial);
     setRecommendation(initial);
     setFeedback(null);
-    document.title = `Ticket ${ticket.id} — CivicLens`;
+    document.title = `Ticket ${ticket.id} — TownThread`;
     // Only re-initialise when navigating to a different ticket, not after a save.
   }, [ticket?.id]);
 
